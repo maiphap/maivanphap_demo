@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MaivanphapApplication {
 
 	public static void main(String[] args) {
+		// Khởi động ứng dụng Spring Boot
 		SpringApplication.run(MaivanphapApplication.class, args);
 	}
 
