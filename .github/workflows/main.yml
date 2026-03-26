@@ -1,0 +1,29 @@
+name: CI/CD Docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Lấy code
+      - name: Checkout code
+        uses: actions/checkout@v6
+      # 2. Login Docker Hub
+      - name: Login Docker
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      # 3. Build & Push Image
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: username/springboot-app:latest
