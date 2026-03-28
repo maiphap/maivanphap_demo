@@ -26,9 +26,9 @@ jobs:
           
     - name: Triển khai lên DevOps Classroom
       run: |
-          REPO="maiphap/spring-app:latest"
+          REPO="maiphap/demojava:latest"
           CONTAINER_PORT=80
-          RESPONSE=$(curl -m 600 -sS -w "\n%{http_code}" -X POST "${{ secrets.DEPLOY_URL }}?repo=$REPO&tag=latest&slot=6&container_port=$CONTAINER_PORT&strict_container_port=0")
+          RESPONSE=$(curl -sS -w "\n%{http_code}" -X POST "${{ secrets.DEPLOY_URL }}?repo=$REPO&tag=latest&slot=6&container_port=$CONTAINER_PORT&strict_container_port=0")
           BODY=$(echo "$RESPONSE" | sed "$d")
           CODE=$(echo "$RESPONSE" | tail -n1)
           echo "Webhook HTTP: $CODE"
@@ -42,4 +42,4 @@ jobs:
           echo "Deploy thành công."
           echo "::group::Chi tiết webhook JSON"
           echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"
-          echo "::endgroup::"
+          echo "::endgroup::""
